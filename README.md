@@ -38,3 +38,7 @@ Plugin Hub picks it up on its next catalog refresh (every three hours).
 - Comment threads (needs a browser `plugin.js` or a small server to turn Algolia's JSON into text).
 - Ask HN posts, which have no link to download.
 - A check that skips pages that do not convert to readable text.
+
+## License
+
+[MIT](LICENSE)
