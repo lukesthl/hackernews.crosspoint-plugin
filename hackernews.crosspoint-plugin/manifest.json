@@ -1,0 +1,13 @@
+{
+  "name": "hackernews",
+  "title": "Hacker News",
+  "description": "Browse and search Hacker News, and save linked articles as text for offline reading.",
+  "author": "lukestahl",
+  "version": "0.1.0",
+  "files": [
+    "manifest.json",
+    "device.json",
+    "README.md",
+    "DETAILS.md"
+  ]
+}

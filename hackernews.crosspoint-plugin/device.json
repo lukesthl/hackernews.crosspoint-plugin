@@ -1,0 +1,35 @@
+{
+  "title": "Hacker News",
+  "description": "Browse and search Hacker News, and save linked articles as text for offline reading.",
+  "browse": {
+    "format": "json",
+    "url": "https://hn.algolia.com/api/v1/search?tags=front_page&offset={offset}&length={limit}&attributesToRetrieve=title,author,url",
+    "items": "hits",
+    "page_size": 15,
+    "fields": {
+      "title": "title",
+      "author": "author",
+      "id": "objectID",
+      "url": "url"
+    },
+    "lists": [
+      { "title": "Front Page" },
+      { "title": "Newest", "url": "https://hn.algolia.com/api/v1/search_by_date?tags=story&offset={offset}&length={limit}&attributesToRetrieve=title,author,url" },
+      { "title": "Show HN", "url": "https://hn.algolia.com/api/v1/search_by_date?tags=show_hn&offset={offset}&length={limit}&attributesToRetrieve=title,author,url" }
+    ],
+    "search": {
+      "url": "https://hn.algolia.com/api/v1/search?query={query}&tags=story&offset={offset}&length={limit}&attributesToRetrieve=title,author,url"
+    }
+  },
+  "download": {
+    "url": "https://r.jina.ai/{url}",
+    "method": "GET",
+    "headers": {
+      "X-Return-Format": "text"
+    },
+    "dest_dir": "/Hacker News",
+    "filename": "{title}.txt"
+  },
+  "author": "lukestahl",
+  "version": "0.1.0"
+}
