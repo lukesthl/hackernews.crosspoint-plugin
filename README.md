@@ -1,21 +1,21 @@
-# Hacker News for CrossPoint
+# Hackaday for CrossPoint
 
-A [CrossPoint](https://github.com/crosspoint-reader/crosspoint-reader) SD-card plugin: browse and search Hacker News on the reader and save linked articles as plain text.
+A [CrossPoint](https://github.com/crosspoint-reader/crosspoint-reader) SD-card plugin: browse and search [Hackaday](https://hackaday.com) on the reader and save articles as plain text.
 
-The installable plugin is the `hackernews.crosspoint-plugin/` folder. Everything else in this repo is for development.
+The installable plugin is the `hackaday.crosspoint-plugin/` folder. Everything else in this repo is for development.
 
 ## How it works
 
 The plugin is a single `device.json` and has no code:
 
-- Story lists and search come from the [Algolia HN API](https://hn.algolia.com/api).
-- Selecting a story downloads `https://r.jina.ai/<article-url>` (Jina Reader), which returns the article as plain text, to `/Hacker News/<title>.txt`.
+- Lists and search come from Hackaday's public WordPress REST API (`/wp-json/wp/v2/posts`). Category lists filter by category ID; `_embed=author` supplies the author name, and `_fields` keeps each page small.
+- Selecting a post downloads `https://r.jina.ai/<article-url>` (Jina Reader) to `/Hackaday/<title>.txt`. The `X-Target-Selector: #post-{id}` header keeps only the post's own `<article>` element, which drops the site menus, sidebar and comment thread; `X-Remove-Selector` drops the share widget and the category/tag footer.
 
 ## Try it on a reader
 
 Needs CrossPoint 2.0 (release candidate or nightly) with Plugins enabled under Settings > Connectivity.
 
-Copy the contents of `hackernews.crosspoint-plugin/` to `/.crosspoint/plugins/hackernews/` on the SD card, then open Home > Plugins > Hacker News.
+Copy the contents of `hackaday.crosspoint-plugin/` to `/.crosspoint/plugins/hackaday/` on the SD card, then open Home > Plugins > Hackaday.
 
 ## Check before a release
 
@@ -23,7 +23,7 @@ Copy the contents of `hackernews.crosspoint-plugin/` to `/.crosspoint/plugins/ha
 python3 tools/check.py
 ```
 
-It validates the manifest and `device.json`, and calls each live API URL once.
+It validates the manifest and `device.json`, and calls each live API URL once. `--offline` skips the network checks.
 
 ## Publish to Plugin Hub
 
@@ -35,9 +35,13 @@ Plugin Hub picks it up on its next catalog refresh (every three hours).
 
 ## Not done yet
 
-- Comment threads (needs a browser `plugin.js` or a small server to turn Algolia's JSON into text).
-- Ask HN posts, which have no link to download.
-- A check that skips pages that do not convert to readable text.
+- HTML entities in titles. WordPress only exposes `title.rendered`, which is entity-encoded (`Won&#8217;t`), and the firmware's JSON catalog does not decode entities. Hackaday's RSS feed would decode cleanly through the `xml` browse format, but that format has no paging, search or lists.
+- An optional Jina API key: anonymous Jina use is rate-limited per IP and can return an error body instead of the article.
+- Comment threads.
+
+## Credits
+
+Based on the Hacker News CrossPoint plugin by lukestahl.
 
 ## License
 

@@ -1,0 +1,57 @@
+{
+  "title": "Hackaday",
+  "description": "Browse and search Hackaday, and save articles as text for offline reading.",
+  "browse": {
+    "format": "json",
+    "url": "https://hackaday.com/wp-json/wp/v2/posts?per_page={limit}&offset={offset}&_embed=author&_fields=id,link,title,_links.author,_embedded",
+    "items": "",
+    "page_size": 15,
+    "fields": {
+      "title": "title.rendered",
+      "author": "_embedded.author.0.name",
+      "id": "id",
+      "url": "link"
+    },
+    "lists": [
+      {
+        "title": "Latest"
+      },
+      {
+        "title": "Featured",
+        "url": "https://hackaday.com/wp-json/wp/v2/posts?per_page={limit}&offset={offset}&_embed=author&_fields=id,link,title,_links.author,_embedded&categories=35890"
+      },
+      {
+        "title": "Columns",
+        "url": "https://hackaday.com/wp-json/wp/v2/posts?per_page={limit}&offset={offset}&_embed=author&_fields=id,link,title,_links.author,_embedded&categories=190105353"
+      },
+      {
+        "title": "News",
+        "url": "https://hackaday.com/wp-json/wp/v2/posts?per_page={limit}&offset={offset}&_embed=author&_fields=id,link,title,_links.author,_embedded&categories=103"
+      },
+      {
+        "title": "Retrocomputing",
+        "url": "https://hackaday.com/wp-json/wp/v2/posts?per_page={limit}&offset={offset}&_embed=author&_fields=id,link,title,_links.author,_embedded&categories=422578063"
+      },
+      {
+        "title": "Security",
+        "url": "https://hackaday.com/wp-json/wp/v2/posts?per_page={limit}&offset={offset}&_embed=author&_fields=id,link,title,_links.author,_embedded&categories=10969111"
+      }
+    ],
+    "search": {
+      "url": "https://hackaday.com/wp-json/wp/v2/posts?per_page={limit}&offset={offset}&_embed=author&_fields=id,link,title,_links.author,_embedded&search={query}"
+    }
+  },
+  "download": {
+    "url": "https://r.jina.ai/{url}",
+    "method": "GET",
+    "headers": {
+      "X-Return-Format": "text",
+      "X-Target-Selector": "#post-{id}",
+      "X-Remove-Selector": ".share-dialog-content, .entry-footer"
+    },
+    "dest_dir": "/Hackaday",
+    "filename": "{title}.txt"
+  },
+  "author": "xerootg",
+  "version": "0.1.0"
+}

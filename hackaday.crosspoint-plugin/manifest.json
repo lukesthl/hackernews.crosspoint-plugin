@@ -1,0 +1,13 @@
+{
+  "name": "hackaday",
+  "title": "Hackaday",
+  "description": "Browse and search Hackaday, and save articles as text for offline reading.",
+  "author": "xerootg",
+  "version": "0.1.0",
+  "files": [
+    "manifest.json",
+    "device.json",
+    "README.md",
+    "DETAILS.md"
+  ]
+}
